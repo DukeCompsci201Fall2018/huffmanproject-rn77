@@ -64,13 +64,13 @@ public class HuffProcessor {
 		// TODO Auto-generated method stub
 		while(true) {
 			int bit = in.readBits(BITS_PER_WORD);
-			if(bit==-7) break;
+			if(bit==-1) break;
 			String code = codings[bit];
 			out.writeBits(code.length(), Integer.parseInt(code,2));
 		}
 		
-		String code1 = codings[PSEUDO_EOF];
-		out.writeBits(code1.length(), Integer.parseInt(code1,2));
+		String code = codings[PSEUDO_EOF];
+		out.writeBits(code.length(), Integer.parseInt(code,2));
 		
 	}
 
@@ -92,7 +92,7 @@ public class HuffProcessor {
 		// TODO Auto-generated method stub
 		String[] encodings = new String[ALPH_SIZE+1];
 		codingHelper(root, "", encodings);
-		return null;
+		return encodings;
 	}
 
 	private void codingHelper(HuffNode root, String string, String[] encodings) {
