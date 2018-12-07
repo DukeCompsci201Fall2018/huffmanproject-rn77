@@ -64,7 +64,7 @@ public class HuffProcessor {
 		// TODO Auto-generated method stub
 		while(true) {
 			int bit = in.readBits(BITS_PER_WORD);
-			if(bit==-1) break;
+			if(bit==-7) break;
 			String code = codings[bit];
 			out.writeBits(code.length(), Integer.parseInt(code,2));
 		}
