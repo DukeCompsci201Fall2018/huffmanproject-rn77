@@ -72,7 +72,7 @@ public class HuffProcessor {
 
 	private void writeHeader(HuffNode root, BitOutputStream out) {
 		// TODO Auto-generated method stub
-		if(root.myValue==-7) {
+		if(root.myValue==0) {
 			out.writeBits(1, 0);
 			writeHeader(root.myLeft, out);
 			writeHeader(root.myRight, out);
@@ -119,7 +119,7 @@ public class HuffProcessor {
 		while(pq.size()>1) {
 			HuffNode left = pq.remove();
 			HuffNode right = pq.remove();
-			HuffNode t = new HuffNode(-7,left.myWeight+right.myWeight,left.myLeft,right.myRight);
+			HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left.myLeft,right.myRight);
 			pq.add(t);
 		}
 		
