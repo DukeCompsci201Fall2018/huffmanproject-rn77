@@ -64,9 +64,13 @@ public class HuffProcessor {
 		// TODO Auto-generated method stub
 		while(true) {
 			int bit = in.readBits(BITS_PER_WORD);
+			if(bit==-1) break;
 			String code = codings[bit];
 			out.writeBits(code.length(), Integer.parseInt(code,2));
 		}
+		
+		String code1 = codings[PSEUDO_EOF];
+		out.writeBits(code1.length(), Integer.parseInt(code1,2));
 		
 	}
 
@@ -74,16 +78,14 @@ public class HuffProcessor {
 		// TODO Auto-generated method stub
 		if(root.myLeft== null && root.myRight == null) {
 			out.writeBits(1, 0);
-			writeHeader(root.myLeft, out);
-			writeHeader(root.myRight, out);
+			
 		}
 		else {
 			out.writeBits(1, 1);
 			out.writeBits(BITS_PER_WORD+1, root.myValue);
+			writeHeader(root.myLeft, out);
+			writeHeader(root.myRight, out);
 		}
-		
-		
-		
 	}
 
 	private String[] makeCodingsFromTree(HuffNode root) {
