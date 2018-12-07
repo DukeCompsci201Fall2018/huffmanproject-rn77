@@ -88,20 +88,20 @@ public class HuffProcessor {
 			else {
 				if(bits==0) current = current.myLeft;
 				else current = current.myRight;
-				
-				if(current.myRight == null && current.myLeft==null) {
+
+				if(current.myLeft == null && current.myRight==null) {
 					if(current.myValue == PSEUDO_EOF) {
 						break;
 					}
 
-				else {
-					out.writeBits(BITS_PER_WORD + 1, current.myValue);
-					current = root;
-				}
+					else {
+						out.writeBits(BITS_PER_WORD, current.myValue);
+						current = root;
+					}
 				}
 			}
 		}
-		
+
 	}
 
 	private HuffNode readTreeHeader(BitInputStream in) {
