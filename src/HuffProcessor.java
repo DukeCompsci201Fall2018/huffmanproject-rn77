@@ -121,7 +121,8 @@ public class HuffProcessor {
 		while(pq.size()>1) {
 			HuffNode left = pq.remove();
 			HuffNode right = pq.remove();
-			HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left.myLeft,right.myRight);
+			//HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left.myLeft,right.myRight);
+			HuffNode t = new HuffNode(0,left.myWeight+right.myWeight,left,right);
 			pq.add(t);
 		}
 		
@@ -133,14 +134,13 @@ public class HuffProcessor {
 	private int[] readForCounts(BitInputStream in) {
 		// TODO Auto-generated method stub
 		int[] freq = new int[ALPH_SIZE+1];
-		freq[PSEUDO_EOF] = 1;
 		while(true) {
 			int val = in.readBits(BITS_PER_WORD);
 			if(val == -1) break;
 			freq[val] +=1;
 		}
-				
-		
+		freq[PSEUDO_EOF] = 1;		
+
 		return freq;
 	}
 
